@@ -1,4 +1,4 @@
-module github.com/ariel17/golang-base
+module github.com/ariel17/twitter-echo-bot
 
 go 1.17
 
