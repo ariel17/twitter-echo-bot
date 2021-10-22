@@ -7,15 +7,15 @@ import (
 )
 
 const (
-	consumerApiKeyKey = "CONSUMER_API_KEY"
+	consumerApiKeyKey    = "CONSUMER_API_KEY"
 	consumerApiSecretKey = "CONSUMER_API_SECRET"
-	accessTokenKey="ACCESS_TOKEN"
-	accessTokenSecretKey="ACCESS_TOKEN_SECRET"
+	accessTokenKey       = "ACCESS_TOKEN"
+	accessTokenSecretKey = "ACCESS_TOKEN_SECRET"
 )
 
 var (
 	consumerApiKey, consumerApiSecret string
-	accessToken, accessTokenSecret string
+	accessToken, accessTokenSecret    string
 )
 
 // GetOAuth1Config creates a new OAuth v1 configuration object required to
@@ -30,7 +30,7 @@ func GetToken() *oauth1.Token {
 	return oauth1.NewToken(accessToken, accessTokenSecret)
 }
 
-func loadKeys() {
+func loadTwitterKeys() {
 	consumerApiKey = os.Getenv(consumerApiKeyKey)
 	consumerApiSecret = os.Getenv(consumerApiSecretKey)
 	accessToken = os.Getenv(accessTokenKey)
@@ -38,5 +38,5 @@ func loadKeys() {
 }
 
 func init() {
-	loadKeys()
+	loadTwitterKeys()
 }
