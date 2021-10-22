@@ -1,18 +1,11 @@
 package main
 
 import (
-	"log"
-
-	"github.com/ariel17/twitter-echo-bot/pkg/clients"
+	"github.com/ariel17/twitter-echo-bot/pkg/api"
+	"github.com/ariel17/twitter-echo-bot/pkg/jobs"
 )
 
 func main() {
-	// api.StartServer()
-	twitter := clients.NewTwitterClient()
-	tweet, response, err := twitter.Statuses.Update("hola mundo :]", nil)
-	if err != nil {
-		panic(err)
-	}
-	log.Printf("%+v\n", tweet)
-	log.Printf("%+v\n", response)
+	jobs.NewScheduler().Start()
+	api.StartServer()
 }
