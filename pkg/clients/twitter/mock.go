@@ -7,10 +7,12 @@ type MockTwitterClient struct {
 	AnswerErr error
 }
 
+// Search is a mocked method; just returns the tweet array and error object.
 func (mtc *MockTwitterClient) Search(_ string) ([]Tweet, error) {
 	return mtc.Tweets, mtc.SearchErr
 }
 
+// Answer is a mocked method; just returns the error object.
 func (mtc *MockTwitterClient) Answer(_ int64, _ string) error {
 	return mtc.AnswerErr
 }
