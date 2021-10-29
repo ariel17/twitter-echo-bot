@@ -10,6 +10,7 @@ owner for those tweets that matches the query pattern.
 ## Example
 
 [See it on Twitter.](https://twitter.com/ariel_17_/status/1451647851180740609)
+
 ![automated response](./docs/example.png)
 
 ## Build image
