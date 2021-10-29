@@ -8,9 +8,9 @@ import (
 )
 
 func TestIsProduction(t *testing.T) {
-	testCases := []struct{
-		name string
-		value string
+	testCases := []struct {
+		name     string
+		value    string
 		expected bool
 	}{
 		{"environment is production", productionEnv, true},

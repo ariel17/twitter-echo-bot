@@ -10,12 +10,12 @@ import (
 )
 
 func TestAnswer(t *testing.T) {
-	testCases := []struct{
-		name string
+	testCases := []struct {
+		name         string
 		isSuccessful bool
-		tweets []twitter.Tweet
-		searchErr error
-		answerErr error
+		tweets       []twitter.Tweet
+		searchErr    error
+		answerErr    error
 	}{
 		{"ok", true, []twitter.Tweet{{ID: 1, Text: "hello!"}}, nil, nil},
 		{"failed by search error", false, nil, errors.New("mocked search error"), nil},
@@ -25,7 +25,7 @@ func TestAnswer(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			client = &twitter.MockTwitterClient{
-				Tweets: tc.tweets,
+				Tweets:    tc.tweets,
 				SearchErr: tc.searchErr,
 				AnswerErr: tc.answerErr,
 			}

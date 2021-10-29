@@ -2,7 +2,7 @@ package twitter
 
 // MockTwitterClient provides a handful mock object to be used in test units.
 type MockTwitterClient struct {
-	Tweets []Tweet
+	Tweets    []Tweet
 	SearchErr error
 	AnswerErr error
 }

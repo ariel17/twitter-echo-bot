@@ -11,13 +11,13 @@ import (
 const (
 	searchQueryKey  = "SEARCH_QUERY"
 	responseTextKey = "RESPONSE_TEXT"
-	jobSecondsKey = "JOB_SECONDS"
-	defaultSeconds = 60
+	jobSecondsKey   = "JOB_SECONDS"
+	defaultSeconds  = 60
 )
 
 var (
 	searchQuery, responseText string
-	jobSeconds int
+	jobSeconds                int
 )
 
 // GetResponseText returns the configured tweet text to use in the automated
