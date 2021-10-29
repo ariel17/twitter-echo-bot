@@ -7,6 +7,11 @@ This is a very simple application, a proof of concept as working code written in
 Golang, that access the Twitter API to send an answer in the name of the account
 owner for those tweets that matches the query pattern.
 
+## Example
+
+[See it on Twitter.](https://twitter.com/ariel_17_/status/1451647851180740609)
+![automated response](./docs/example.png)
+
 ## Build image
 
 ```bash
