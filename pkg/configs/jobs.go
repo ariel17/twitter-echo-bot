@@ -2,6 +2,7 @@ package configs
 
 import (
 	"errors"
+	"log"
 	"os"
 	"strconv"
 	"time"
@@ -11,6 +12,7 @@ const (
 	searchQueryKey  = "SEARCH_QUERY"
 	responseTextKey = "RESPONSE_TEXT"
 	jobSecondsKey = "JOB_SECONDS"
+	defaultSeconds = 60
 )
 
 var (
@@ -41,8 +43,11 @@ func loadJobKeys() {
 
 	seconds, err := strconv.Atoi(os.Getenv(jobSecondsKey))
 	if err != nil {
-		panic(err)
+		log.Printf("job seconds value is not numeric. Using default value: %d", defaultSeconds)
+		jobSeconds = defaultSeconds
+		return
 	}
+
 	if seconds <= 0 {
 		panic(errors.New("invalid job seconds value"))
 	}
