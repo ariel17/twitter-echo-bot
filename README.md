@@ -1,3 +1,5 @@
+[![Build and Publish](https://github.com/ariel17/twitter-echo-bot/actions/workflows/main.yml/badge.svg)](https://github.com/ariel17/twitter-echo-bot/actions/workflows/main.yml)
+
 # Twitter echo bot
 
 This is a very simple application, a proof of concept as working code written in
