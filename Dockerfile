@@ -1,9 +1,9 @@
-FROM golang:alpine AS build
+FROM golang:stretch AS build
 WORKDIR /build
-ENV CGO_ENABLED=0
+ENV CGO_ENABLED=1
 COPY . .
 RUN go mod tidy
-RUN go test -v ./...
+RUN go test -race -v ./...
 RUN GOOS=linux GOARCH=amd64 go build -o app .
 
 
