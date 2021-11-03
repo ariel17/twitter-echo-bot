@@ -13,13 +13,18 @@ owner for those tweets that matches the query pattern.
 
 ![automated response](./docs/example.png)
 
-## Build image
+## Docker image
+
+The Docker image is hosted at [Docker Hub](https://hub.docker.com/r/ariel17/twitter-echo-bot)
+and it is build and pushed through [GitHub Actions](./actions).
+
+### How to build it
 
 ```bash
 $ docker build -t twitter-echo-bot .
 ```
 
-## Run the application
+### How to execute it
 
 ```bash
 $ docker run -p 8080:8080 \
@@ -32,3 +37,14 @@ $ docker run -p 8080:8080 \
     -e JOB_SECONDS=10 \
     twitter-echo-bot
 ```
+
+## Production deployment
+
+The deployment is made using [Terraform](https://www.terraform.io/) to a AWS
+t2.nano instance.
+
+TODO: not yet completed.
+
+### Development lifecycle
+
+![Services integration diagram](./docs/lifecycle.png)
