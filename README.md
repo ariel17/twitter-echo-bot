@@ -41,9 +41,9 @@ $ docker run -p 8080:8080 \
 ## Production deployment
 
 The deployment is made using [Terraform](https://www.terraform.io/) to a AWS
-t2.nano instance.
+t2.nano instance. The execution plan works as follows:
 
-TODO: not yet completed.
+![Execution plan](./docs/graph.svg)
 
 ### Development lifecycle
 
