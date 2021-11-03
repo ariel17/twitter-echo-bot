@@ -38,12 +38,23 @@ $ docker run -p 8080:8080 \
     twitter-echo-bot
 ```
 
+Using an `.env` is preferred, also the deployment process uses it to provide
+the required settings to the application instead of setting raw environment
+variables.
+
+```bash
+$ docker run --env-file=.env twitter-echo-bot
+```
+
 ## Production deployment
 
 The deployment is made using [Terraform](https://www.terraform.io/) to a AWS
 t2.nano instance. The execution plan works as follows:
 
 ![Execution plan](./docs/graph.svg)
+
+:warning: This configuration uses SSH to provision the Docker service, to pull
+and execute the image; it may not be the most secure option for you.
 
 ### Development lifecycle
 
