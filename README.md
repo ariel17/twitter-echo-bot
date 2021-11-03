@@ -40,7 +40,7 @@ $ docker run -p 8080:8080 \
 
 Using an `.env` is preferred, also the deployment process uses it to provide
 the required settings to the application instead of setting raw environment
-variables.
+variables. **Watch out to not track it!**
 
 ```bash
 $ docker run --env-file=.env twitter-echo-bot
