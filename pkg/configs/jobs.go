@@ -12,7 +12,6 @@ const (
 	searchQueryKey  = "SEARCH_QUERY"
 	responseTextKey = "RESPONSE_TEXT"
 	jobSecondsKey   = "JOB_SECONDS"
-	defaultSeconds  = 60
 )
 
 var (
@@ -37,23 +36,34 @@ func GetJobSeconds() time.Duration {
 	return time.Duration(jobSeconds) * time.Second
 }
 
-func loadJobKeys() {
+func loadJobKeys() error {
 	searchQuery = os.Getenv(searchQueryKey)
+	if searchQuery == "" {
+		return errors.New("query cannot be empty")
+	}
+
 	responseText = os.Getenv(responseTextKey)
+	if responseText == "" {
+		return errors.New("response cannot be empty")
+	}
 
 	seconds, err := strconv.Atoi(os.Getenv(jobSecondsKey))
 	if err != nil {
-		log.Printf("job seconds value is not numeric. Using default value: %d", defaultSeconds)
-		jobSeconds = defaultSeconds
-		return
+		return errors.New("seconds cannot be empty")
 	}
-
 	if seconds <= 0 {
-		panic(errors.New("invalid job seconds value"))
+		return errors.New("invalid job seconds value")
 	}
 	jobSeconds = seconds
+
+	return nil
 }
 
 func init() {
-	loadJobKeys()
+	err := loadJobKeys()
+	if IsProduction() {
+		panic(err)
+	} else {
+		log.Printf("failed to parse job keys: %+v", err)
+	}
 }
