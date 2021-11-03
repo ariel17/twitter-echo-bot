@@ -25,14 +25,14 @@ jobs:
           command: |
             mkdir -p /tmp/test-reports
             gotestsum --junitfile /tmp/test-reports/unit-tests.xml
-            go test -coverprofile=c.out
-            mv c.out /tmp
+            go test -race -covermode=atomic -coverprofile=coverage.out
+            mv coverage.out /tmp
       - store_test_results:
           path: /tmp/test-reports
       - store_artifacts:
           path: /tmp/artifacts
       - codecov/upload:
-          file: /tmp/c.out
+          file: /tmp/coverage.out
 
 workflows:
   master:
