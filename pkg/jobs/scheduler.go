@@ -23,7 +23,7 @@ func NewDefaultScheduler() *Scheduler {
 	return &Scheduler{
 		ticker: time.NewTicker(configs.GetJobSeconds()),
 		done:   make(chan bool),
-		f: tick,
+		f: answer,
 	}
 }
 
@@ -47,6 +47,7 @@ func (s *Scheduler) Start() {
 				return
 			case <-s.ticker.C:
 				if err := s.f(); err != nil {
+					log.Printf("tick method failed: %v", err)
 					panic(err)
 				}
 			}
@@ -65,12 +66,4 @@ func (s *Scheduler) Stop() {
 
 func (s *Scheduler) IsTicking() bool {
 	return s.isTicking
-}
-
-func tick() error {
-	if err := answer(); err != nil {
-		log.Fatalf("answer method failed: %v", err)
-		return err
-	}
-	return nil
 }
