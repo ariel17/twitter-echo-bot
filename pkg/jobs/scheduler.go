@@ -2,6 +2,7 @@ package jobs
 
 import (
 	"log"
+	"sync"
 	"time"
 
 	"github.com/ariel17/twitter-echo-bot/pkg/configs"
@@ -13,6 +14,7 @@ type Scheduler struct {
 	done   chan bool
 	f func() error
 	isTicking bool
+	m  sync.Mutex
 }
 
 // NewDefaultScheduler creates a new instance of scheduler with an specific f function
@@ -36,6 +38,7 @@ func NewScheduler(f func() error, tickDuration time.Duration) *Scheduler {
 }
 
 func (s *Scheduler) Start() {
+	s.m.Lock()
 	s.isTicking = true
 	go func() {
 		for {
@@ -49,12 +52,15 @@ func (s *Scheduler) Start() {
 			}
 		}
 	}()
+	s.m.Unlock()
 }
 
 func (s *Scheduler) Stop() {
+	s.m.Lock()
 	s.ticker.Stop()
 	s.done <- true
 	s.isTicking = false
+	s.m.Unlock()
 }
 
 func (s *Scheduler) IsTicking() bool {
