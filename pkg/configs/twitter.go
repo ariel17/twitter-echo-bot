@@ -1,6 +1,8 @@
 package configs
 
 import (
+	"errors"
+	"log"
 	"os"
 
 	"github.com/dghubble/oauth1"
@@ -30,13 +32,22 @@ func GetToken() *oauth1.Token {
 	return oauth1.NewToken(accessToken, accessTokenSecret)
 }
 
-func loadTwitterKeys() {
+func loadTwitterKeys() error {
 	consumerApiKey = os.Getenv(consumerApiKeyKey)
 	consumerApiSecret = os.Getenv(consumerApiSecretKey)
 	accessToken = os.Getenv(accessTokenKey)
 	accessTokenSecret = os.Getenv(accessTokenSecretKey)
+	if consumerApiKey == "" || consumerApiSecret == "" || accessToken == "" || accessTokenSecret == "" {
+		return errors.New("missing Twitter credentials")
+	}
+	return nil
 }
 
 func init() {
-	loadTwitterKeys()
+	err := loadTwitterKeys()
+	if IsProduction() {
+		panic(err)
+	} else {
+		log.Printf("error parsing Twitter env settings: %+v", err)
+	}
 }
