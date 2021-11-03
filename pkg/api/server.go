@@ -2,7 +2,6 @@ package api
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 
 	"github.com/ariel17/twitter-echo-bot/pkg/configs"
@@ -10,14 +9,9 @@ import (
 
 const statusPath = "/status"
 
-// StartServer creates a new instance of HTTP server with indicated handlers
-// configured and begins serving content.
-func StartServer() {
+// NewServer creates a new instance of HTTP server with indicated handlers
+// configured.
+func NewServer() *http.Server {
 	http.HandleFunc(statusPath, statusHandler)
-	s := http.Server{Addr: fmt.Sprintf(":%d", configs.APIPort)}
-
-	log.Printf("Listening new connections on :%d", configs.APIPort)
-	if err := s.ListenAndServe(); err != nil {
-		panic(err)
-	}
+	return &http.Server{Addr: fmt.Sprintf(":%d", configs.APIPort)}
 }

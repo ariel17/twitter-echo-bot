@@ -7,5 +7,5 @@ import (
 
 func main() {
 	jobs.NewDefaultScheduler().Start()
-	api.StartServer()
+	_ = api.NewServer().ListenAndServe()
 }
