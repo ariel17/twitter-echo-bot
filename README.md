@@ -46,6 +46,17 @@ variables. **Watch out to not track it!**
 $ docker run --env-file=.env twitter-echo-bot
 ```
 
+### Using make commands
+
+This project includes a Makefile to avoid writting all those commands by hand
+and go directly to the point with the same results:
+
+```bash
+$ make build  # to test and build the image with :dev tag
+
+$ make run  # builds AND executes the application in your terminal
+```
+
 ## Production deployment
 
 The deployment is made using [Terraform](https://www.terraform.io/) to a AWS
