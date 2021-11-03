@@ -1,6 +1,7 @@
 [![Build and Publish](https://github.com/ariel17/twitter-echo-bot/actions/workflows/main.yml/badge.svg)](https://github.com/ariel17/twitter-echo-bot/actions/workflows/main.yml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/ariel17/twitter-echo-bot)](https://goreportcard.com/report/github.com/ariel17/twitter-echo-bot)
 [![CircleCI](https://circleci.com/gh/ariel17/twitter-echo-bot/tree/master.svg?style=svg)](https://circleci.com/gh/ariel17/twitter-echo-bot/tree/master)
+[![codecov](https://codecov.io/gh/ariel17/twitter-echo-bot/branch/master/graph/badge.svg?token=8RSF7F1NIQ)](https://codecov.io/gh/ariel17/twitter-echo-bot)
 
 # Twitter echo bot
 
