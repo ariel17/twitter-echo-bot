@@ -44,10 +44,11 @@ func loadTwitterKeys() error {
 }
 
 func init() {
-	err := loadTwitterKeys()
-	if IsProduction() {
-		panic(err)
-	} else {
-		log.Printf("error parsing Twitter env settings: %+v", err)
+	if err := loadTwitterKeys(); err != nil {
+		if IsProduction() {
+			panic(err)
+		} else {
+			log.Printf("error parsing Twitter env settings: %+v", err)
+		}
 	}
 }

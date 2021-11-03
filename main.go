@@ -6,6 +6,6 @@ import (
 )
 
 func main() {
-	jobs.NewScheduler().Start()
+	jobs.NewDefaultScheduler().Start()
 	api.StartServer()
 }

@@ -12,11 +12,12 @@ type Scheduler struct {
 	ticker *time.Ticker
 	done   chan bool
 	f func() error
+	isTicking bool
 }
 
-// NewScheduler creates a new instance of scheduler with an specific f function
+// NewDefaultScheduler creates a new instance of scheduler with an specific f function
 // to tick.
-func NewScheduler() *Scheduler {
+func NewDefaultScheduler() *Scheduler {
 	return &Scheduler{
 		ticker: time.NewTicker(configs.GetJobSeconds()),
 		done:   make(chan bool),
@@ -24,7 +25,18 @@ func NewScheduler() *Scheduler {
 	}
 }
 
+// NewScheduler creates a generic scheduler with ticker. What to do and in how
+// many times is indicated through parameters.
+func NewScheduler(f func() error, tickDuration time.Duration) *Scheduler {
+	return &Scheduler{
+		ticker: time.NewTicker(tickDuration),
+		done:   make(chan bool),
+		f: f,
+	}
+}
+
 func (s *Scheduler) Start() {
+	s.isTicking = true
 	go func() {
 		for {
 			select {
@@ -42,6 +54,11 @@ func (s *Scheduler) Start() {
 func (s *Scheduler) Stop() {
 	s.ticker.Stop()
 	s.done <- true
+	s.isTicking = false
+}
+
+func (s *Scheduler) IsTicking() bool {
+	return s.isTicking
 }
 
 func tick() error {

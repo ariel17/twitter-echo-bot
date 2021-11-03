@@ -60,10 +60,11 @@ func loadJobKeys() error {
 }
 
 func init() {
-	err := loadJobKeys()
-	if IsProduction() {
-		panic(err)
-	} else {
-		log.Printf("failed to parse job keys: %+v", err)
+	if err := loadJobKeys(); err != nil {
+		if IsProduction() {
+			panic(err)
+		} else {
+			log.Printf("failed to parse job keys: %+v", err)
+		}
 	}
 }
