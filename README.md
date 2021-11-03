@@ -11,12 +11,14 @@ owner for those tweets that matches the query pattern.
 
 [See it on Twitter.](https://twitter.com/ariel_17_/status/1451647851180740609)
 
-![automated response](./docs/example.png)
+![Automated response](./docs/example.png)
 
 ## Docker image
 
 The Docker image is hosted at [Docker Hub](https://hub.docker.com/r/ariel17/twitter-echo-bot)
 and it is build and pushed through [GitHub Actions](./actions).
+
+![Docker repository](./docs/docker.png)
 
 ### How to build it
 
