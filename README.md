@@ -4,7 +4,7 @@
 # Twitter echo bot
 
 This is a very simple application, a proof of concept as working code written in
-Golang, that access the Twitter API to send an answer in the name of the account
+Golang, that access Twitter API to send an answer in the name of the account
 owner for those tweets that matches the query pattern.
 
 ## Example
