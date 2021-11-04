@@ -16,10 +16,14 @@ func TestAnswer(t *testing.T) {
 		tweets       []twitter.Tweet
 		searchErr    error
 		answerErr    error
+		cache        map[int64]struct{}
 	}{
-		{"ok", true, []twitter.Tweet{{ID: 1, Text: "hello!", ScreenName: "ariel17"}}, nil, nil},
-		{"failed by search error", false, nil, errors.New("mocked search error"), nil},
-		{"failed by answer error", false, []twitter.Tweet{{ID: 1, Text: "hello!"}}, nil, errors.New("mocked answer error")},
+		{"ok", true, []twitter.Tweet{{ID: 1, Text: "hello!", ScreenName: "ariel17"}}, nil, nil, map[int64]struct{}{}},
+		{"ok by tweet already cached", true, []twitter.Tweet{{ID: 1, Text: "hello!", ScreenName: "ariel17"}}, nil, nil, map[int64]struct{}{
+			1: struct{}{},
+		}},
+		{"failed by search error", false, nil, errors.New("mocked search error"), nil, map[int64]struct{}{}},
+		{"failed by answer error", false, []twitter.Tweet{{ID: 1, Text: "hello!"}}, nil, errors.New("mocked answer error"), map[int64]struct{}{}},
 	}
 
 	for _, tc := range testCases {
@@ -29,6 +33,8 @@ func TestAnswer(t *testing.T) {
 				SearchErr: tc.searchErr,
 				AnswerErr: tc.answerErr,
 			}
+			cache = tc.cache
+
 			err := answer()
 			assert.Equal(t, tc.isSuccessful, err == nil)
 			if tc.searchErr != nil {
