@@ -67,7 +67,7 @@ resource "aws_instance" "bot_server" {
       "sudo yum update -y",
       "sudo yum install docker -y",
       "sudo service docker start",
-      "sudo docker run --env-file=/home/ec2-user/.env -d ariel17/twitter-echo-bot:latest"
+      "sudo docker run --pull=always --env-file=/home/ec2-user/.env -d ariel17/twitter-echo-bot:latest"
     ]
   }
 
