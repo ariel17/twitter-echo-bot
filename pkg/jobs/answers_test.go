@@ -17,7 +17,7 @@ func TestAnswer(t *testing.T) {
 		searchErr    error
 		answerErr    error
 	}{
-		{"ok", true, []twitter.Tweet{{ID: 1, Text: "hello!", UserName: "ariel17"}}, nil, nil},
+		{"ok", true, []twitter.Tweet{{ID: 1, Text: "hello!", ScreenName: "ariel17"}}, nil, nil},
 		{"failed by search error", false, nil, errors.New("mocked search error"), nil},
 		{"failed by answer error", false, []twitter.Tweet{{ID: 1, Text: "hello!"}}, nil, errors.New("mocked answer error")},
 	}
@@ -43,7 +43,7 @@ func TestAnswer(t *testing.T) {
 
 func TestCreateText(t *testing.T) {
 	tweet := twitter.Tweet{
-		UserName: "ariel17",
+		ScreenName: "ariel17",
 	}
 	testCases := []struct {
 		name     string

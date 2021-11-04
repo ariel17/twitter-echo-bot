@@ -23,6 +23,7 @@ func answer() error {
 
 	for _, tweet := range tweets {
 		text := createText(tweet, configs.GetGreetText(), configs.GetResponseText())
+		log.Printf("will answer with following text: %s", text)
 		if err := client.Answer(tweet.ID, text); err != nil {
 			if strings.Contains(err.Error(), "duplicate") {
 				log.Printf("WARNING: this tweet was already answered: %+v; error: %+v", tweet, err)
@@ -30,13 +31,13 @@ func answer() error {
 			}
 			return err
 		}
-		log.Printf("Answered successfully to tweet %+v", tweet)
+		log.Printf("Answered successfully to tweet '%+v' with response '%+v'", tweet, text)
 	}
 	return nil
 }
 
 func createText(tweet twitter.Tweet, greet, response string) string {
-	text := fmt.Sprintf("%s @%s %s", greet, tweet.UserName, response)
+	text := fmt.Sprintf("%s @%s %s", greet, tweet.ScreenName, response)
 	return strings.Trim(text, " ")
 }
 
