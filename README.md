@@ -37,6 +37,7 @@ $ docker run -p 8080:8080 \
     -e ACCESS_TOKEN="token" \
     -e ACCESS_TOKEN_SECRET="token_secret" \
     -e SEARCH_QUERY="#ariel17echobot" \
+    -e GREET_TEXT="Hellou!" \
     -e RESPONSE_TEXT="bip bop bip!" \
     -e JOB_SECONDS=10 \
     twitter-echo-bot
