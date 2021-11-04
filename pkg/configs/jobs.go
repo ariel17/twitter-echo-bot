@@ -10,14 +10,22 @@ import (
 
 const (
 	searchQueryKey  = "SEARCH_QUERY"
+	greetTextKey    = "GREET_TEXT"
 	responseTextKey = "RESPONSE_TEXT"
 	jobSecondsKey   = "JOB_SECONDS"
 )
 
 var (
-	searchQuery, responseText string
-	jobSeconds                int
+	searchQuery             string
+	greetText, responseText string
+	jobSeconds              int
 )
+
+// GetGreetText returns the configured tweet introduction to the tweeting user.
+// It will be suffixed with the response text.
+func GetGreetText() string {
+	return greetText
+}
 
 // GetResponseText returns the configured tweet text to use in the automated
 // response.
@@ -41,6 +49,8 @@ func loadJobKeys() error {
 	if searchQuery == "" {
 		return errors.New("query cannot be empty")
 	}
+
+	greetText = os.Getenv(greetTextKey)
 
 	responseText = os.Getenv(responseTextKey)
 	if responseText == "" {

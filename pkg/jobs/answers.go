@@ -1,6 +1,7 @@
 package jobs
 
 import (
+	"fmt"
 	"log"
 	"strings"
 
@@ -21,7 +22,8 @@ func answer() error {
 	log.Printf("Found this amount of tweets: %d", len(tweets))
 
 	for _, tweet := range tweets {
-		if err := client.Answer(tweet.ID, configs.GetResponseText()); err != nil {
+		text := createText(tweet, configs.GetGreetText(), configs.GetResponseText())
+		if err := client.Answer(tweet.ID, text); err != nil {
 			if strings.Contains(err.Error(), "duplicate") {
 				log.Printf("WARNING: this tweet was already answered: %+v; error: %+v", tweet, err)
 				continue
@@ -31,6 +33,11 @@ func answer() error {
 		log.Printf("Answered successfully to tweet %+v", tweet)
 	}
 	return nil
+}
+
+func createText(tweet twitter.Tweet, greet, response string) string {
+	text := fmt.Sprintf("%s @%s %s", greet, tweet.UserName, response)
+	return strings.Trim(text, " ")
 }
 
 func init() {

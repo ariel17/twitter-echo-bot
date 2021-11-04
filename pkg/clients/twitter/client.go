@@ -25,6 +25,7 @@ type TwitterClient interface {
 type Tweet struct {
 	ID   int64  `json:"id"`
 	Text string `json:"text"`
+	UserName string `json:"user_name"`
 }
 
 // New creates a new client instance based on the environment.
@@ -62,6 +63,7 @@ func (tc *twitterClient) Search(query string) ([]Tweet, error) {
 		tweets = append(tweets, Tweet{
 			ID:   tweet.ID,
 			Text: tweet.Text,
+			UserName: tweet.User.Name,
 		})
 	}
 	return tweets, nil
