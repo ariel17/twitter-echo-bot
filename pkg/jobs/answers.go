@@ -23,7 +23,7 @@ func answer() error {
 	for _, tweet := range tweets {
 		if err := client.Answer(tweet.ID, configs.GetResponseText()); err != nil {
 			if strings.Contains(err.Error(), "duplicate") {
-				log.Printf("WARNING: this tweet was already answered: %+v", tweet)
+				log.Printf("WARNING: this tweet was already answered: %+v; error: %+v", tweet, err)
 				continue
 			}
 			return err
